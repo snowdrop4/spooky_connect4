@@ -1,0 +1,62 @@
+[build-system]
+requires = ["setuptools>=61", "setuptools-rust"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rust-connect4"
+version = "0.2.15"
+description = "High-performance connect4 library with arbitrary board sizes"
+readme = "README.md"
+requires-python = ">=3.13"
+classifiers = []
+dependencies = []
+
+[dependency-groups]
+dev = [
+    "setuptools-rust",
+    "pyright>=1.1.405",
+    "pytest>=9.0",
+    "pytest-xdist>=3.8.0",
+    "ruff>=0.13.1",
+]
+
+# ------------------------------------------------------------------------------
+# Ruff
+# ------------------------------------------------------------------------------
+
+[tool.ruff]
+line-length = 120
+target-version = "py313"
+exclude = ["vendor"]
+
+[tool.ruff.lint]
+select = ["A", "B", "E", "F", "I", "W", "C4", "PIE", "PTH", "RUF", "NPY", "RSE", "PT", "ASYNC", "ICN", "RSE", "TID", "UP", "FURB", "RET", "ANN"]
+ignore = [
+    "RUF028", # Invalid fmt supression comment
+    "E221",   # Multiple spaces before operator
+    "E241",   # Multiple spaces after comma
+    "E272",   # Multiple spaces before keyword
+    "E402",   # Module level import not at top of file
+    "E501",   # Line too long
+    "E741",   # Ambiguous variable name
+    "PT013",  # pytest import not in form "import pytest"
+]
+preview = true
+
+[tool.ruff.lint.isort]
+force-sort-within-sections = true
+known-first-party = []
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"
+
+[tool.ruff.format]
+quote-style = "double"
+preview = true
+
+# ------------------------------------------------------------------------------
+# Pytest
+# ------------------------------------------------------------------------------
+[tool.pytest]
+pythonpath = ["."]
+addopts = ["--import-mode=importlib"]
